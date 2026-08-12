@@ -276,7 +276,8 @@ const resumeData = {
   ],
 
   resumeDownloads: [
-    { label: "Download Resume", file: "/Raza_Ali_Malik.pdf" },
+    { label: "Download Resume (Full-Stack)", file: "/Raza_Ali_Malik.pdf" },
+    { label: "Download Resume (Remote-Focused)", file: "/Raza_Ali_Malik_Remote.pdf" },
   ],
 };
 
