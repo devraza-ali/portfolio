@@ -2,7 +2,7 @@
   "name": "personal-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://devraza-ali.github.io/portfolio/",
   "type": "module",
   "dependencies": {
     "react": "^18.3.1",
