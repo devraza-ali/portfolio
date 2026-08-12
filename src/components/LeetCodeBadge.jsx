@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import C from "../theme";
 
-const LEETCODE_USERNAME = "sghani001";
+const LEETCODE_USERNAME = "razaali";
 
 // Hardcoded accurate fallback from actual LeetCode profile
 const FALLBACK_STATS = {
