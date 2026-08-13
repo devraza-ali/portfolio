@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:121316,40:1C1917,80:926839,100:D4A373&height=200&section=header&text=Personal%20Portfolio&fontSize=48&fontColor=FAF8F5&fontAlignY=38&desc=Raza%20Ali%20Malik%20%C2%B7%20Full-Stack%20Engineer&descSize=18&descAlignY=58&descColor=D4A373" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:121212,35:1C1C1C,70:9A9A9A,100:8FB8FF&height=200&section=header&text=Raza%20Ali%20Malik&fontSize=52&fontColor=FFFFFF&fontAlignY=38&desc=Full-Stack%20Engineer%20%E2%80%A2%20React%2FNext.js%20%E2%80%A2%20Rails%20%E2%80%A2%20TypeScript&descAlignY=58&descSize=16&descColor=8FB8FF&animation=fadeIn" width="100%"/>
 
 <br/>
 
@@ -49,4 +49,4 @@ If you're looking for a versatile software engineer who can write clean domains,
 
 ---
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:121316,40:1C1917,80:926839,100:D4A373&height=120&section=footer&fontSize=1" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:8FB8FF,30:9A9A9A,65:1C1C1C,100:121212&height=120&section=footer" width="100%"/>
