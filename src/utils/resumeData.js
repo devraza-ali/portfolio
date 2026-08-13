@@ -1,5 +1,11 @@
 // Raza Ali Malik — portfolio single source of truth
-// No headshot yet — About section falls back to "RM" initials avatar.
+
+// Public-folder assets must be prefixed with Vite's base path (currently
+// "/portfolio/" for the github.io project-page subpath). index.html's own
+// asset refs (e.g. the favicon) get this rewritten automatically by Vite,
+// but hardcoded string paths used inside JSX (img src, download links) do
+// not — hence building every public asset URL through this helper.
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 const resumeData = {
   name: "Raza Ali Malik",
@@ -22,7 +28,7 @@ const resumeData = {
   portfolioUrl: "",
   linkedinUrl: "https://www.linkedin.com/in/raza-malik-81109a268",
   githubUrl: "https://github.com/devraza-ali",
-  photo: "/raza_malik.jpg",
+  photo: asset("Raza-ali.jpg"),
 
   availability: {
     status: "Available immediately",
@@ -276,8 +282,8 @@ const resumeData = {
   ],
 
   resumeDownloads: [
-    { label: "Download Resume (Full-Stack)", file: "/Raza_Ali_Malik.pdf" },
-    { label: "Download Resume (Remote-Focused)", file: "/Raza_Ali_Malik_Remote.pdf" },
+    { label: "Download Resume (Full-Stack)", file: asset("Raza_Ali_Malik.pdf") },
+    { label: "Download Resume (Remote-Focused)", file: asset("Raza_Ali_Malik_Remote.pdf") },
   ],
 };
 
