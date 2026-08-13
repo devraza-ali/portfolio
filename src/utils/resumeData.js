@@ -5,7 +5,10 @@
 // asset refs (e.g. the favicon) get this rewritten automatically by Vite,
 // but hardcoded string paths used inside JSX (img src, download links) do
 // not — hence building every public asset URL through this helper.
-const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+// Guarded so this file can also be `import`-ed by plain Node scripts (e.g.
+// scripts/generate-og-image.mjs), where import.meta.env doesn't exist.
+const BASE_URL = (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.BASE_URL) || "/";
+const asset = (path) => `${BASE_URL}${path}`;
 
 const resumeData = {
   name: "Raza Ali Malik",
