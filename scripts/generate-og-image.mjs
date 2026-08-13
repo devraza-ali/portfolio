@@ -4,12 +4,14 @@
 import sharp from "sharp";
 import { writeFile, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import resumeData from "../src/utils/resumeData.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
 const OUT_PATH = path.join(PUBLIC_DIR, "og-image.png");
+const INDEX_HTML_PATH = path.join(__dirname, "..", "index.html");
 const WIDTH = 1536;
 const HEIGHT = 1024;
 const ACCENT = "#8FB8FF";
@@ -101,4 +103,23 @@ const svg = `
 
 const png = await sharp(Buffer.from(svg)).png().toBuffer();
 await writeFile(OUT_PATH, png);
-console.log(`og-image.png regenerated from resumeData.js (${resumeData.credibilityStrip.length} stats)`);
+
+// Cache-bust: link-unfurlers (Slack, Discord, Twitter, ...) cache the OG
+// image by its exact URL and won't re-fetch just because the file content
+// changed underneath it. Appending a hash of the actual bytes means the URL
+// only changes when the image genuinely does, forcing a fresh fetch then —
+// and staying stable (good for normal caching) otherwise.
+const hash = createHash("sha256").update(png).digest("hex").slice(0, 8);
+let html = await readFile(INDEX_HTML_PATH, "utf8");
+html = html
+  .replace(
+    /(content="%BASE_URL%og-image\.png)(\?v=[a-f0-9]+)?"/,
+    `$1?v=${hash}"`
+  )
+  .replace(
+    /(content="https:\/\/razaali\.is-a\.dev\/og-image\.png)(\?v=[a-f0-9]+)?"/,
+    `$1?v=${hash}"`
+  );
+await writeFile(INDEX_HTML_PATH, html);
+
+console.log(`og-image.png regenerated from resumeData.js (${resumeData.credibilityStrip.length} stats, hash ${hash})`);
