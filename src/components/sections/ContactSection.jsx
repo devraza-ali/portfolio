@@ -93,10 +93,10 @@ export function ContactSection() {
             <div>
               <p style={{ fontSize: 11, fontFamily: "'JetBrains Mono',monospace", textTransform: "uppercase", letterSpacing: "0.18em", color: C.secondary, marginBottom: 8 }}>Direct Contact</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <a href="tel:+923039205909" style={{ color: C.primary, textDecoration: "none", fontSize: 15, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <a href="tel:+447463504810" style={{ color: C.primary, textDecoration: "none", fontSize: 15, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 8 }}>
                   <IconForTech name="phone" size={16} colored={true} /> {resumeData.phone}
                 </a>
-                <a href="https://wa.me/923039205909" target="_blank" rel="noreferrer" style={{ color: "var(--whatsapp)", textDecoration: "none", fontSize: 15, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <a href="https://wa.me/447463504810" target="_blank" rel="noreferrer" style={{ color: "var(--whatsapp)", textDecoration: "none", fontSize: 15, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 8 }}>
                   <IconForTech name="whatsapp" size={16} colored={true} /> WhatsApp Chat
                 </a>
               </div>

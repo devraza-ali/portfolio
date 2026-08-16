@@ -17,7 +17,7 @@ const resumeData = {
   email: "devraza.ali@gmail.com",
   location: "Luton, UK",
   timezone: "UK (GMT+0/BST) · open to any time zone — async-first",
-  phone: "+92 303 920 5909",
+  phone: "+44 7463 504810",
   portfolioUrl: "https://razaali.is-a.dev",
   linkedinUrl: "https://www.linkedin.com/in/raza-malik-81109a268",
   githubUrl: "https://github.com/devraza-ali",
