@@ -1,5 +1,6 @@
 import React from "react";
-import C from "../../theme";
+import C, { alpha } from "../../theme";
+import { StatNumber } from "../StatNumber";
 
 export function MetricsSection() {
   const stats = [
@@ -11,7 +12,7 @@ export function MetricsSection() {
   ];
 
   return (
-    <div style={{ borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, background: `${C.surface}60` }}>
+    <div style={{ borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, background: `${alpha(C.surface, "60")}` }}>
       <div style={{ maxWidth: 1160, margin: "0 auto", padding: "0 24px", display: "flex", flexWrap: "wrap" }}>
         {stats.map((s, i) => (
           <div
@@ -23,7 +24,7 @@ export function MetricsSection() {
               borderRight: i < stats.length - 1 ? `1px solid ${C.border}` : "none",
             }}
           >
-            <div style={{ fontSize: 26, fontWeight: 800, fontFamily: "'JetBrains Mono',monospace", color: C.copper, marginBottom: 6 }}>{s.value}</div>
+            <StatNumber value={s.value} style={{ display: "block", fontSize: 26, fontWeight: 800, fontFamily: "'JetBrains Mono',monospace", color: C.accentText, marginBottom: 6 }} />
             <div style={{ fontSize: 11, color: C.secondary, textTransform: "uppercase", letterSpacing: "0.15em", lineHeight: 1.4 }}>{s.label}</div>
           </div>
         ))}

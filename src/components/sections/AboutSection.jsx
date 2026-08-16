@@ -1,19 +1,23 @@
 import React from "react";
+import { motion } from "framer-motion";
 import resumeData from "../../utils/resumeData";
-import C from "../../theme";
+import C, { alpha } from "../../theme";
 import { FadeUp, Section } from "../UI";
 import { socialLinks } from "../../data/sectionsData";
 import { IconLocation, IconGlobe, IconForTech, getTechColor } from "../Icons";
+import { useScrollParallax } from "../../hooks/useScrollParallax";
 
 export function AboutSection() {
+  const { ref: photoParallaxRef, y: photoParallaxY } = useScrollParallax(30);
+
   return (
-    <Section id="about" label="About" title="Who You're Hiring">
+    <Section id="about" label="About" title="Who You're Hiring" watermark="ABOUT">
       <div className="about-grid">
         <FadeUp>
-          <div style={{ position: "relative", maxWidth: 260 }}>
+          <motion.div ref={photoParallaxRef} style={{ position: "relative", maxWidth: 260, y: photoParallaxY }}>
             <div style={{ width: "100%", aspectRatio: "1", borderRadius: 18, overflow: "hidden", background: C.surface, border: `1px solid ${C.border}`, boxShadow: "0 8px 32px rgba(0,0,0,0.28)" }}>
               <img
-                src={resumeData.photo}
+                src="/Raza-ali.jpg"
                 alt="Raza Ali Malik — Full-Stack Software Engineer, Lahore"
                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
                 onError={(e) => {
@@ -25,7 +29,7 @@ export function AboutSection() {
             <div style={{ position: "absolute", bottom: -14, right: -14, padding: "8px 16px", borderRadius: 10, background: `linear-gradient(135deg, ${C.copper}, ${C.copperDeep})`, color: C.onGold, fontSize: 12, fontFamily: "'JetBrains Mono',monospace", boxShadow: `0 6px 20px rgba(0,0,0,0.35)` }}>
               GMT+5 · Remote ✓
             </div>
-          </div>
+          </motion.div>
         </FadeUp>
 
         <FadeUp delay={100}>
@@ -35,7 +39,7 @@ export function AboutSection() {
             </p>
             <p style={{ fontSize: 15, color: C.secondary, lineHeight: 1.75, marginBottom: 28 }}>{resumeData.aboutExtra}</p>
 
-            <div style={{ display: "inline-flex", flexWrap: "wrap", alignItems: "center", gap: 10, padding: "10px 18px", borderRadius: 12, marginBottom: 32, background: `${C.copper}0C`, border: `1px solid ${C.copper}30`, color: C.copper, fontSize: 14, fontWeight: 600 }}>
+            <div style={{ display: "inline-flex", flexWrap: "wrap", alignItems: "center", gap: 10, padding: "10px 18px", borderRadius: 12, marginBottom: 32, background: `${alpha(C.copper, "0C")}`, border: `1px solid ${alpha(C.copper, "30")}`, color: C.accentText, fontSize: 14, fontWeight: 600 }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                 <IconLocation size={14} /> Lahore, Pakistan
               </span>
@@ -59,7 +63,7 @@ export function AboutSection() {
             <div style={{ padding: "16px 20px", borderRadius: 12, background: C.surface, border: `1px solid ${C.border}`, marginBottom: 28 }}>
               <p style={{ fontSize: 11, fontFamily: "'JetBrains Mono',monospace", textTransform: "uppercase", letterSpacing: "0.12em", color: C.secondary, margin: "0 0 6px" }}>Education</p>
               <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, color: C.primary, fontSize: 14, margin: "0 0 2px" }}>{resumeData.education[0].degree}</p>
-              <p style={{ color: C.copper, fontSize: 13, margin: 0 }}>{resumeData.education[0].institution} · {resumeData.education[0].duration}</p>
+              <p style={{ color: C.accentText, fontSize: 13, margin: 0 }}>{resumeData.education[0].institution} · {resumeData.education[0].duration}</p>
             </div>
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>

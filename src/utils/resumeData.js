@@ -1,15 +1,5 @@
 // Raza Ali Malik — portfolio single source of truth
 
-// Public-folder assets must be prefixed with Vite's base path (currently
-// "/portfolio/" for the github.io project-page subpath). index.html's own
-// asset refs (e.g. the favicon) get this rewritten automatically by Vite,
-// but hardcoded string paths used inside JSX (img src, download links) do
-// not — hence building every public asset URL through this helper.
-// Guarded so this file can also be `import`-ed by plain Node scripts (e.g.
-// scripts/generate-og-image.mjs), where import.meta.env doesn't exist.
-const BASE_URL = (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.BASE_URL) || "/";
-const asset = (path) => `${BASE_URL}${path}`;
-
 const resumeData = {
   name: "Raza Ali Malik",
   title: "Full-Stack Software Engineer",
@@ -28,10 +18,10 @@ const resumeData = {
   location: "Lahore, Pakistan",
   timezone: "GMT+5 · 4–5 hr overlap with EU · available for US East morning standups",
   phone: "+92 303 920 5909",
-  portfolioUrl: "",
+  portfolioUrl: "https://razaali.is-a.dev",
   linkedinUrl: "https://www.linkedin.com/in/raza-malik-81109a268",
   githubUrl: "https://github.com/devraza-ali",
-  photo: asset("Raza-ali.jpg"),
+  photo: "/raza-ali-no-bg.png",
 
   availability: {
     status: "Available immediately",
@@ -115,11 +105,9 @@ const resumeData = {
           url: "https://app.errandsdash.com/",
           flagship: true,
           role: "Sole Developer",
-          description:
-            "Shipping & logistics platform — Next.js frontend, Rails backend, PostgreSQL, built and owned end to end.",
+          description: "Shipping & logistics platform — Next.js frontend, Rails backend, PostgreSQL, built and owned end to end.",
           tech: ["Next.js", "Ruby on Rails", "PostgreSQL", "Stripe", "REST API"],
-          problem:
-            "Client needed a scalable shipping and logistics platform that could handle high request volume, process payments reliably, and load fast for a growing user base.",
+          problem: "Client needed a scalable shipping and logistics platform that could handle high request volume, process payments reliably, and load fast for a growing user base.",
           metrics: [
             "Served 2,000+ users, processing $50K+ monthly GMV",
             "REST API handling 100+ requests/second",
@@ -132,11 +120,9 @@ const resumeData = {
           name: "Allergy Clinic Management",
           url: "https://allergy.entas.org/",
           role: "Solo Full-Stack Ownership",
-          description:
-            "Custom clinic platform for patient records, allergy tracking, appointments, and workflows.",
+          description: "Custom clinic platform for patient records, allergy tracking, appointments, and workflows.",
           tech: ["React.js", "Ruby on Rails", "PostgreSQL"],
-          problem:
-            "Clinic relied on manual, paper-based tracking for allergy management, vaccinations, patient records, and appointments — slow and error-prone.",
+          problem: "Clinic relied on manual, paper-based tracking for allergy management, vaccinations, patient records, and appointments — slow and error-prone.",
           metrics: [
             "Automated 50+ daily manual entries → 70% reduction in admin overhead",
             "Deployed to production supporting 200+ patient records, zero downtime",
@@ -147,8 +133,7 @@ const resumeData = {
         {
           name: "Fanlist",
           url: "https://www.fanlist.com/",
-          description:
-            "Sports fan engagement platform with real-time, personalized content feeds.",
+          description: "Sports fan engagement platform with real-time, personalized content feeds.",
           tech: ["Next.js", "Ruby on Rails", "Jest"],
           metrics: [
             "1,000+ active users, real-time personalized content",
@@ -160,8 +145,7 @@ const resumeData = {
         {
           name: "VUCustom",
           url: "https://vucustom.com/",
-          description:
-            "Multi-tenant B2C platform — developed features for the LAX brand across 5+ sub-brands.",
+          description: "Multi-tenant B2C platform — developed features for the LAX brand across 5+ sub-brands.",
           tech: ["React.js", "Ruby on Rails", "Multi-tenant"],
           metrics: [
             "Built B2C features for the LAX brand across a multi-tenant platform (5+ sub-brands)",
@@ -172,22 +156,16 @@ const resumeData = {
         {
           name: "Experfy",
           url: "https://www.experfy.com/",
-          description:
-            "Backend development on a large-scale React + Rails platform supporting enterprise-level applications.",
+          description: "Backend development on a large-scale React + Rails platform supporting enterprise-level applications.",
           tech: ["React.js", "Ruby on Rails", "REST API"],
-          metrics: [
-            "Designed and optimized RESTful APIs, improving performance and reliability",
-          ],
+          metrics: ["Designed and optimized RESTful APIs, improving performance and reliability"],
         },
         {
           name: "NEXO & CrossFit RRG",
           url: "https://app2.crossfitrrg.com/",
-          description:
-            "Maintained and enhanced legacy React (class-based) and Rails applications for two production clients.",
+          description: "Maintained and enhanced legacy React (class-based) and Rails applications for two production clients.",
           tech: ["React.js", "Ruby on Rails"],
-          metrics: [
-            "Worked directly with clients on requirements, technical support, and production reliability",
-          ],
+          metrics: ["Worked directly with clients on requirements, technical support, and production reliability"],
         },
       ],
     },
@@ -214,6 +192,7 @@ const resumeData = {
       degree: "B.Sc. Computer Science",
       institution: "FAST NUCES (Tier-1 University), Lahore",
       duration: "2019 — 2023",
+      coursework: ["Data Structures & Algorithms", "Database Systems", "Software Engineering", "Web Technologies", "Operating Systems", "Computer Networks"],
     },
   ],
 
@@ -270,7 +249,17 @@ const resumeData = {
     ],
   },
 
-  // ── Personal projects (none published yet) ────────────────────────────────
+  // ── Open source — none published ──────────────────────────────────────────
+  openSource: {
+    combinedDownloads: 0,
+    rubygemsProfile: "",
+    gems: [],
+  },
+
+  // ── Testimonials — none collected yet ─────────────────────────────────────
+  testimonials: [],
+
+  // ── Personal projects — none published yet ────────────────────────────────
   projects: [],
 
   // ── Engineering practices ─────────────────────────────────────────────────
@@ -285,8 +274,8 @@ const resumeData = {
   ],
 
   resumeDownloads: [
-    { label: "Download Resume (Full-Stack)", file: asset("Raza_Ali_Malik.pdf") },
-    { label: "Download Resume (Remote-Focused)", file: asset("Raza_Ali_Malik_Remote.pdf") },
+    { label: "Download Resume (Full-Stack)", file: "/Raza_Ali_Malik.pdf" },
+    { label: "Download Resume (Remote-Focused)", file: "/Raza_Ali_Malik_Remote.pdf" },
   ],
 };
 

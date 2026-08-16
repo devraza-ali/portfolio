@@ -1,12 +1,5 @@
 import resumeData from "../utils/resumeData";
 
-export const heroStats = [
-  { value: "4+", label: "Years in Production" },
-  { value: "6+", label: "SaaS Platforms Shipped" },
-  { value: "$500K+", label: "GMV Processed" },
-  { value: "2,000+", label: "Active Users Served" },
-];
-
 export const processSteps = [
   {
     n: "01",
