@@ -40,7 +40,7 @@ export function Footer() {
               Raza Ali Malik
             </p>
             <p style={{ fontFamily: "'JetBrains Mono',monospace", color: C.secondary, fontSize: 11, margin: 0 }}>
-              React · Next.js · Rails · Lahore & Remote
+              React · Next.js · Rails · Remote
             </p>
           </div>
         </div>

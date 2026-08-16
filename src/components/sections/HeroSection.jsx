@@ -64,7 +64,7 @@ function TiltPortrait() {
       >
         <img
           src={resumeData.photo}
-          alt="Raza Ali Malik — Full-Stack Software Engineer, Lahore"
+          alt="Raza Ali Malik — Full-Stack Software Engineer"
           width={840}
           height={840}
           /* The page's LCP element: fetched eagerly at high priority, with
@@ -213,7 +213,7 @@ export function HeroSection() {
               }}
             >
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: C.copper, animation: "pulse 2s infinite" }} />
-              Open to Lahore companies & remote roles worldwide
+              Open to remote roles worldwide
             </div>
           </FadeUp>
 

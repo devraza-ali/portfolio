@@ -7,7 +7,7 @@ import { processSteps } from "../../data/sectionsData";
 
 export function ProcessSection() {
   return (
-    <Section id="process" label="Engagement" title="How I Work" subtitle="A predictable, low-overhead process — for a Lahore hiring manager or a remote founder. Hover a card for the details." watermark="PROCESS">
+    <Section id="process" label="Engagement" title="How I Work" subtitle="A predictable, low-overhead process — for a remote hiring manager or founder. Hover a card for the details." watermark="PROCESS">
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))", gap: 14 }}>
         {processSteps.map((s, i) => (
           <FadeUp key={i} delay={i * 80}>

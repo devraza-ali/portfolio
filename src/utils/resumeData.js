@@ -15,8 +15,8 @@ const resumeData = {
     "Full-stack engineer building and owning production React/Next.js + Ruby on Rails SaaS systems — from architecture and payments to polished UI. Currently a Software Engineer at Medical Guardian (remote) and Team Lead at Blackstack Software Solutions. Open to remote roles globally.",
 
   email: "devraza.ali@gmail.com",
-  location: "Lahore, Pakistan",
-  timezone: "GMT+5 · 4–5 hr overlap with EU · available for US East morning standups",
+  location: "Luton, UK",
+  timezone: "UK (GMT+0/BST) · open to any time zone — async-first",
   phone: "+92 303 920 5909",
   portfolioUrl: "https://razaali.is-a.dev",
   linkedinUrl: "https://www.linkedin.com/in/raza-malik-81109a268",

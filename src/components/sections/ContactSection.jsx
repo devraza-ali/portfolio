@@ -103,8 +103,8 @@ export function ContactSection() {
             </div>
             <div>
               <p style={{ fontSize: 11, fontFamily: "'JetBrains Mono',monospace", textTransform: "uppercase", letterSpacing: "0.18em", color: C.secondary, marginBottom: 8 }}>Location</p>
-              <p style={{ color: C.primary, fontWeight: 600, margin: "0 0 4px" }}>Lahore, Pakistan · GMT+5</p>
-              <p style={{ color: C.secondary, fontSize: 13, margin: 0 }}>Async-first. EU/US schedule overlap available.</p>
+              <p style={{ color: C.primary, fontWeight: 600, margin: "0 0 4px" }}>{resumeData.location} · GMT+0/BST</p>
+              <p style={{ color: C.secondary, fontSize: 13, margin: 0 }}>Async-first. Open to any time zone.</p>
             </div>
             <div>
               <p style={{ fontSize: 11, fontFamily: "'JetBrains Mono',monospace", textTransform: "uppercase", letterSpacing: "0.18em", color: C.secondary, marginBottom: 12 }}>Profiles</p>
@@ -211,7 +211,6 @@ export function ContactSection() {
                   onBlur={(e) => (e.target.style.borderColor = C.border)}
                 >
                   <option value="">Select role type…</option>
-                  <option>On-site / Hybrid (Lahore)</option>
                   <option>Remote — Full-time</option>
                   <option>Remote — Contract / Freelance</option>
                   <option>Other / Just exploring</option>

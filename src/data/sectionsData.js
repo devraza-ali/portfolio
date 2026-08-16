@@ -17,7 +17,7 @@ export const processSteps = [
     n: "03",
     iconName: "execution",
     title: "Execution",
-    desc: "Regular async updates. Works across GMT+5 / EU / US overlap. Real, testable progress — not status theater.",
+    desc: "Regular async updates. Open to any time zone — real, testable progress, not status theater.",
   },
   {
     n: "04",

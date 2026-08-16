@@ -18,7 +18,7 @@ export function AboutSection() {
             <div style={{ width: "100%", aspectRatio: "1", borderRadius: 18, overflow: "hidden", background: C.surface, border: `1px solid ${C.border}`, boxShadow: "0 8px 32px rgba(0,0,0,0.28)" }}>
               <img
                 src="/Raza-ali.jpg"
-                alt="Raza Ali Malik — Full-Stack Software Engineer, Lahore"
+                alt="Raza Ali Malik — Full-Stack Software Engineer"
                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
                 onError={(e) => {
                   e.target.style.display = "none";
@@ -27,7 +27,7 @@ export function AboutSection() {
               />
             </div>
             <div style={{ position: "absolute", bottom: -14, right: -14, padding: "8px 16px", borderRadius: 10, background: `linear-gradient(135deg, ${C.copper}, ${C.copperDeep})`, color: C.onGold, fontSize: 12, fontFamily: "'JetBrains Mono',monospace", boxShadow: `0 6px 20px rgba(0,0,0,0.35)` }}>
-              GMT+5 · Remote ✓
+              UK · Remote ✓
             </div>
           </motion.div>
         </FadeUp>
@@ -41,14 +41,14 @@ export function AboutSection() {
 
             <div style={{ display: "inline-flex", flexWrap: "wrap", alignItems: "center", gap: 10, padding: "10px 18px", borderRadius: 12, marginBottom: 32, background: `${alpha(C.copper, "0C")}`, border: `1px solid ${alpha(C.copper, "30")}`, color: C.accentText, fontSize: 14, fontWeight: 600 }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                <IconLocation size={14} /> Lahore, Pakistan
+                <IconLocation size={14} /> {resumeData.location}
               </span>
               <span style={{ color: C.border }}>·</span>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                 <IconGlobe size={14} /> Remote worldwide
               </span>
               <span style={{ color: C.border }}>·</span>
-              <span>GMT+5 · EU/US overlap available</span>
+              <span>GMT+0/BST · open to any time zone</span>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 32 }}>
