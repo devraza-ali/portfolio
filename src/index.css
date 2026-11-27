@@ -811,3 +811,38 @@ main section[id] { scroll-margin-top: 76px; }
     background-repeat: repeat;
   }
 }
+/* ── Playful layer ─────────────────────────────────────────────────────── */
+.rails-spot {
+  transition: transform 0.2s ease-out, box-shadow 0.25s;
+}
+.rails-spot:hover {
+  transform: translateY(-4px);
+}
+.rails-spot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.fun-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  translate: -50% 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100vw - 32px);
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--primary);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow: 0 16px 40px var(--shadow-hover);
+  font-size: 14px;
+}
+.fun-toast a {
+  color: var(--accent-text);
+  font-weight: 600;
+  text-decoration: none;
+}

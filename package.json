@@ -20,12 +20,14 @@
     "vite": "^5.2.10"
   },
   "scripts": {
+    "predev": "node scripts/fetch-contributions.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/generate-og-image.mjs",
+    "prebuild": "node scripts/fetch-contributions.mjs && node scripts/generate-og-image.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "contributions": "node scripts/fetch-contributions.mjs"
   },
   "browserslist": {
     "production": [
