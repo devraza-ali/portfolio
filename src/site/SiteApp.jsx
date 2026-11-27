@@ -4,13 +4,13 @@ import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { FiBriefcase, FiCpu, FiFileText, FiGithub, FiHome, FiLayers, FiLinkedin, FiMail, FiMoon, FiPlay, FiSun, FiTerminal } from "react-icons/fi";
 import resumeData from "../utils/resumeData";
 import Dock from "../components/reactbits/Dock";
-import TargetCursor from "../components/reactbits/TargetCursor";
 import { FunLayer } from "../components/FunLayer";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { usePointerFine } from "../hooks/usePointerFine";
 import { AchievementToasts, TrophyButton, unlock } from "./achievements";
 import { Terminal, openTerminal } from "./Terminal";
+import { Cursor } from "./Cursor";
 import { Hero } from "./sections/Hero";
 import { Marquee } from "./sections/Glance";
 import { About } from "./sections/About";
@@ -18,7 +18,8 @@ import { Work } from "./sections/Work";
 import { Expertise, Skills, Experience } from "./sections/Depth";
 import { Activity } from "./sections/Activity";
 import { Playground } from "./sections/Playground";
-import { Contact, Footer } from "./sections/Contact";
+import { Contact } from "./sections/Contact";
+import { Footer } from "./sections/Footer";
 import "./site.css";
 
 const SECTIONS = ["top", "about", "work", "expertise", "skills", "experience", "github", "games", "contact"];
@@ -236,10 +237,10 @@ function HirePill() {
     const n = hops + 1;
     setHops(n);
     if (n <= HOPS.length) {
-      setLabel(n === 1 ? "Nope 😜" : "Too slow!");
+      setLabel(n === 1 ? "Nope!" : "Too slow!");
       return;
     }
-    setLabel("Okay okay, let's talk 😅");
+    setLabel("Okay okay, let's talk");
     unlock("hire");
     try {
       sessionStorage.setItem("rm-hire-caught", "1");
@@ -313,7 +314,7 @@ export default function SiteApp() {
         <ScrollProgress />
         <div className="site-grain" aria-hidden="true" />
         {!reduced && <CursorGlow />}
-        {!reduced && <TargetCursor spinDuration={2.4} hideDefaultCursor parallaxOn cursorColor="#ffffff" blendMode="difference" />}
+        <Cursor />
 
         <header className="topbar">
           <a href="#top" className="logo cursor-target" data-cursor-label="home" aria-label="Back to top"><b>RM</b> <span className="logo-name">Raza Ali Malik</span></a>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { FiArrowUpRight, FiClock, FiCreditCard, FiLayers, FiRefreshCw, FiUsers } from "react-icons/fi";
+import { FiArrowUpRight, FiBookOpen, FiClock, FiCoffee, FiCreditCard, FiGlobe, FiHeadphones, FiLayers, FiMapPin, FiMoon, FiPhoneCall, FiRefreshCw, FiSun, FiUploadCloud, FiUsers, FiZap } from "react-icons/fi";
 import resumeData from "../../utils/resumeData";
 import SpotlightCard from "../../components/reactbits/SpotlightCard";
 import CountUp from "../../components/reactbits/CountUp";
@@ -89,13 +89,13 @@ const SKIES = {
 };
 
 function mood(h) {
-  if (h < 7) return "Probably asleep 😴";
-  if (h < 9) return "Coffee first ☕";
-  if (h < 12) return "Deep work mode 🎧";
-  if (h < 13) return "Lunch break 🥪";
-  if (h < 18) return "Shipping things 🚀";
-  if (h < 22) return "Reviews & US calls 🌎";
-  return "Probably asleep 😴";
+  if (h < 7) return [FiMoon, "Probably asleep"];
+  if (h < 9) return [FiCoffee, "Coffee first"];
+  if (h < 12) return [FiHeadphones, "Deep work mode"];
+  if (h < 13) return [FiSun, "Lunch break"];
+  if (h < 18) return [FiUploadCloud, "Shipping things"];
+  if (h < 22) return [FiPhoneCall, "Reviews & US calls"];
+  return [FiMoon, "Probably asleep"];
 }
 
 const STARS = Array.from({ length: 18 }, (_, i) => ({ x: (i * 53) % 100, y: (i * 37) % 60, d: (i % 5) * 0.6 }));
@@ -132,7 +132,7 @@ function SkyClock() {
             {pad(now.h)}:{pad(now.m)}
             <span>:{pad(now.s)}</span>
           </div>
-          <div className="sky-mood">{mood(now.h)}</div>
+          <div className="sky-mood">{(([Icon, text]) => <><Icon size={13} /> {text}</>)(mood(now.h))}</div>
         </div>
       </div>
     </div>
@@ -197,10 +197,10 @@ const NOW = [
 ];
 
 const FACT_CHIPS = [
-  `📍 ${resumeData.location}`,
-  "🌍 Remote, any time zone",
-  "🎓 BSc CS · FAST NUCES",
-  "⚡ Async-first",
+  [FiMapPin, resumeData.location],
+  [FiGlobe, "Remote, any time zone"],
+  [FiBookOpen, "BSc CS · FAST NUCES"],
+  [FiZap, "Async-first"],
 ];
 
 const BIO =
@@ -229,9 +229,9 @@ export function About() {
                 <span className="chip about-status">
                   <span className="live-dot" /> {resumeData.availability.status}
                 </span>
-                {FACT_CHIPS.map((f) => (
+                {FACT_CHIPS.map(([Icon, f]) => (
                   <motion.span key={f} className="chip" whileHover={{ y: -3, rotate: -1.5 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
-                    {f}
+                    <Icon size={13} className="chip-icon" /> {f}
                   </motion.span>
                 ))}
               </div>

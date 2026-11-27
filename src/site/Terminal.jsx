@@ -52,7 +52,7 @@ function run(raw, ctx) {
         { text: "…and a few secret ones. Tab completes, ↑ ↓ walks history.", cls: "dim" },
       ];
     case "whoami":
-      return [{ text: `${d.name} · ${d.title}`, cls: "accent" }, d.tagline, `📍 ${d.location} · ${d.timezone}`];
+      return [{ text: `${d.name} · ${d.title}`, cls: "accent" }, d.tagline, `${d.location} · ${d.timezone}`];
     case "about":
     case "summary":
       return [d.summary, "", d.aboutExtra].filter((x) => x != null);
@@ -102,7 +102,7 @@ function run(raw, ctx) {
     case "email":
     case "mail":
       navigator.clipboard?.writeText(d.email).catch(() => {});
-      return [{ text: `📋 Copied ${d.email} to your clipboard.`, cls: "accent" }];
+      return [{ text: `Copied ${d.email} to your clipboard.`, cls: "accent" }];
     case "linkedin":
       open(d.linkedinUrl);
       return ["Opening LinkedIn…"];
@@ -116,7 +116,7 @@ function run(raw, ctx) {
       return ["Opening résumé…"];
     case "hire":
       ctx.close(() => scrollTo("contact"));
-      return [{ text: "Great choice. Taking you to the contact form… 🤝", cls: "accent" }];
+      return [{ text: "Great choice. Taking you to the contact form…", cls: "accent" }];
     case "theme": {
       const next = arg === "light" || arg === "dark" ? arg : document.documentElement.classList.contains("light") ? "dark" : "light";
       window.dispatchEvent(new CustomEvent("rm:theme", { detail: next }));
@@ -124,7 +124,7 @@ function run(raw, ctx) {
     }
     case "goto":
     case "cd": {
-      if (c === "cd" && (!arg || arg === "~" || arg === "/")) return ["You're already home. 🏠"];
+      if (c === "cd" && (!arg || arg === "~" || arg === "/")) return ["You're already home."];
       const id = SECTIONS[arg.toLowerCase()];
       if (!id) return [{ text: `No such section. Try: ${[...new Set(Object.values(SECTIONS))].join(", ")}`, cls: "err" }];
       ctx.close(() => scrollTo(id));
@@ -138,7 +138,7 @@ function run(raw, ctx) {
         scrollTo("games");
         window.dispatchEvent(new CustomEvent("rm:play", { detail: id }));
       });
-      return [{ text: `Loading ${id}… 🎮`, cls: "accent" }];
+      return [{ text: `Loading ${id}…`, cls: "accent" }];
     }
     case "achievements":
     case "trophies": {
@@ -150,7 +150,7 @@ function run(raw, ctx) {
         { text: `${got.length}/${ACHIEVEMENTS.length} unlocked`, cls: "accent" },
         ...ACHIEVEMENTS.map((a) => {
           const has = got.includes(a.id);
-          return { text: `  ${has ? `${a.icon} ${a.title}` : "🔒 ???"} · ${a.hint}`, cls: has ? "" : "dim" };
+          return { text: `  ${has ? "[x]" : "[ ]"} ${has ? a.title : "???"} · ${a.hint}`, cls: has ? "" : "dim" };
         }),
       ];
     }
@@ -160,7 +160,7 @@ function run(raw, ctx) {
       if (arg === "about.txt") return run("about", ctx);
       if (arg === "skills.json") return JSON.stringify({ frontend: ["React", "Next.js", "TypeScript"], backend: ["Rails", "PostgreSQL", "Redis"], payments: ["Stripe"] }, null, 2).split("\n");
       if (arg === "resume.pdf") return ["%PDF-1.7 ����… that's binary. Try: resume"];
-      if (arg === ".secrets") return ["🤫 The best code is the code you don't have to write.", "Also: try sudo, vim, or the Konami code."];
+      if (arg === ".secrets") return ["The best code is the code you don't have to write.", "Also: try sudo, vim, or the Konami code."];
       return [{ text: `cat: ${arg || "?"}: No such file. Try ls.`, cls: "err" }];
     }
     case "pwd":
@@ -172,12 +172,12 @@ function run(raw, ctx) {
     case "hi":
     case "hello":
     case "hey":
-      return ["👋 Hey! Glad you found this. Type help to look around."];
+      return ["Hey! Glad you found this. Type help to look around."];
     case "sudo":
       unlock("sudo");
-      return [{ text: `[sudo] password for guest: ********`, cls: "dim" }, { text: "guest is not in the sudoers file. This incident will be reported. 🚨", cls: "err" }];
+      return [{ text: `[sudo] password for guest: ********`, cls: "dim" }, { text: "guest is not in the sudoers file. This incident will be reported.", cls: "err" }];
     case "rm":
-      return arg.includes("-rf") ? [{ text: "Nice try. There are backups. And tests. 😌", cls: "err" }] : [{ text: "rm: permission denied", cls: "err" }];
+      return arg.includes("-rf") ? [{ text: "Nice try. There are backups. And tests.", cls: "err" }] : [{ text: "rm: permission denied", cls: "err" }];
     case "vim":
     case "vi":
     case "nano":
@@ -185,12 +185,12 @@ function run(raw, ctx) {
       return [`Opening ${c}… just kidding. Nobody has ever exited it. Type exit instead.`];
     case "coffee":
     case "brew":
-      return ["☕ Brewing…", "████████████ 100%", { text: "Done. Ready to ship.", cls: "accent" }];
+      return ["Brewing…", "████████████ 100%", { text: "Done. Ready to ship.", cls: "accent" }];
     case "git":
-      return arg.startsWith("push") ? [{ text: "Everything up-to-date. Ship it. 🚀", cls: "accent" }] : ["On branch main. Your portfolio is clean."];
+      return arg.startsWith("push") ? [{ text: "Everything up-to-date. Ship it.", cls: "accent" }] : ["On branch main. Your portfolio is clean."];
     case "npm":
     case "yarn":
-      return ["added 1 developer, audited 0 vulnerabilities. ✨"];
+      return ["added 1 developer, audited 0 vulnerabilities."];
     case "rails":
       return ["=> Booting Puma", "=> Rails 7 application starting in production", { text: "* Listening on http://raza:3000 — hire away", cls: "accent" }];
     case "exit":

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiCrosshair, FiGrid, FiPlay, FiRotateCcw, FiTerminal, FiUploadCloud } from "react-icons/fi";
+import { FiCrosshair, FiGrid, FiPlay, FiRotateCcw, FiStar, FiTerminal, FiUploadCloud, FiZap } from "react-icons/fi";
 import DecryptedText from "../../components/reactbits/DecryptedText";
 import CountUp from "../../components/reactbits/CountUp";
 import { IconForTech } from "../../components/Icons";
@@ -61,7 +61,7 @@ function Overlay({ title, children, actionLabel, onAction, record }) {
         animate={{ y: 0, scale: 1 }}
         transition={{ duration: 0.45, ease: EASE }}
       >
-        {record && <span className="pg-record">★ New personal best</span>}
+        {record && <span className="pg-record"><FiStar size={12} /> New personal best</span>}
         <h3 className="display pg-overlay-title">
           <DecryptedText text={title} animateOn="view" speed={35} maxIterations={12} sequential revealDirection="start" />
         </h3>
@@ -234,7 +234,7 @@ function BugHunt() {
     <div className="pg-game">
       <div className="pg-hud">
         <span>Score <b>{score}</b></span>
-        <span className={streak >= 5 ? "pg-hot" : ""}>{streak >= 5 ? `🔥 x2 combo · ${streak}` : `Combo ${streak}`}</span>
+        <span className={streak >= 5 ? "pg-hot" : ""}>{streak >= 5 ? <><FiZap size={12} /> x2 combo · {streak}</> : `Combo ${streak}`}</span>
         <span>
           <b>{left}</b>s left
         </span>

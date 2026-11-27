@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiAward, FiLock, FiX } from "react-icons/fi";
+import { FiAward, FiCommand, FiCrosshair, FiFlag, FiGrid, FiLock, FiMail, FiPlay, FiSearch, FiSlash, FiSun, FiTerminal, FiUploadCloud, FiUserCheck, FiX, FiZap } from "react-icons/fi";
 
 /**
  * A tiny achievements system. Anything on the page can call unlock(id); the
@@ -8,18 +8,19 @@ import { FiAward, FiLock, FiX } from "react-icons/fi";
  * lets the toast and the trophy panel update without a context provider.
  */
 export const ACHIEVEMENTS = [
-  { id: "terminal", icon: "⌨️", title: "Root access", hint: "Find the hidden terminal" },
-  { id: "sudo", icon: "🙅", title: "Nice try", hint: "Ask the terminal for superpowers" },
-  { id: "konami", icon: "🕹️", title: "Old school", hint: "↑ ↑ ↓ ↓ ← → ← → …" },
-  { id: "theme", icon: "💡", title: "Light switch", hint: "Can't decide on a theme" },
-  { id: "curious", icon: "🔍", title: "Curious mind", hint: "Open three project write-ups" },
-  { id: "hire", icon: "🤝", title: "Persistent", hint: "Catch the Hire me button" },
-  { id: "bottom", icon: "📜", title: "The whole story", hint: "Reach the very bottom" },
-  { id: "bugs", icon: "🐞", title: "Exterminator", hint: "Score 25+ in Bug Hunt" },
-  { id: "deploy", icon: "🚀", title: "Ship it", hint: "5 releases in Deploy or Die" },
-  { id: "wpm", icon: "⚡", title: "Keyboard warrior", hint: "40+ wpm in Type the Stack" },
-  { id: "match", icon: "🧠", title: "Total recall", hint: "Stack Match in 9 moves or fewer" },
-  { id: "arcade", icon: "👾", title: "Arcade regular", hint: "Play all four games" },
+  { id: "terminal", icon: FiTerminal, title: "Root access", hint: "Find the hidden terminal" },
+  { id: "sudo", icon: FiSlash, title: "Nice try", hint: "Ask the terminal for superpowers" },
+  { id: "konami", icon: FiCommand, title: "Old school", hint: "↑ ↑ ↓ ↓ ← → ← → …" },
+  { id: "theme", icon: FiSun, title: "Light switch", hint: "Can't decide on a theme" },
+  { id: "curious", icon: FiSearch, title: "Curious mind", hint: "Open three project write-ups" },
+  { id: "hire", icon: FiUserCheck, title: "Persistent", hint: "Catch the Hire me button" },
+  { id: "hello", icon: FiMail, title: "Hello there", hint: "Send me a message" },
+  { id: "bottom", icon: FiFlag, title: "The whole story", hint: "Reach the very bottom" },
+  { id: "bugs", icon: FiCrosshair, title: "Exterminator", hint: "Score 25+ in Bug Hunt" },
+  { id: "deploy", icon: FiUploadCloud, title: "Ship it", hint: "5 releases in Deploy or Die" },
+  { id: "wpm", icon: FiZap, title: "Keyboard warrior", hint: "40+ wpm in Type the Stack" },
+  { id: "match", icon: FiGrid, title: "Total recall", hint: "Stack Match in 9 moves or fewer" },
+  { id: "arcade", icon: FiPlay, title: "Arcade regular", hint: "Play all four games" },
 ];
 
 const KEY = "rm-achievements";
@@ -105,7 +106,7 @@ export function AchievementToasts() {
             exit={{ y: 20, opacity: 0, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 380, damping: 28 }}
           >
-            <span className="ach-icon">{current.icon}</span>
+            <span className="ach-icon"><current.icon size={20} /></span>
             <span>
               <span className="ach-kicker">Achievement unlocked</span>
               <b>{current.title}</b>
@@ -173,7 +174,7 @@ export function TrophyButton() {
             <div className="ach-head">
               <div>
                 <b>Achievements</b>
-                <span>{got.size === total ? "All found. You're a legend. 🏆" : `${got.size} of ${total} found. Explore to unlock the rest.`}</span>
+                <span>{got.size === total ? "All found. You're a legend." : `${got.size} of ${total} found. Explore to unlock the rest.`}</span>
               </div>
               <button type="button" className="ach-close" aria-label="Close" onClick={() => setOpen(false)}>
                 <FiX />
@@ -185,7 +186,7 @@ export function TrophyButton() {
                 const has = got.has(a.id);
                 return (
                   <li key={a.id} className={has ? "is-got" : ""}>
-                    <span className="ach-icon">{has ? a.icon : <FiLock size={14} />}</span>
+                    <span className="ach-icon">{has ? <a.icon size={15} /> : <FiLock size={14} />}</span>
                     <span>
                       <b>{has ? a.title : "???"}</b>
                       <small>{a.hint}</small>
