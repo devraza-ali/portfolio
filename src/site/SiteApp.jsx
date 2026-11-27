@@ -1,22 +1,28 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { FiBriefcase, FiCpu, FiFileText, FiGithub, FiHome, FiLayers, FiLinkedin, FiMail, FiMoon, FiSun } from "react-icons/fi";
+import { FiBriefcase, FiCpu, FiFileText, FiGithub, FiHome, FiLayers, FiLinkedin, FiMail, FiMoon, FiPlay, FiSun, FiTerminal } from "react-icons/fi";
 import resumeData from "../utils/resumeData";
 import Dock from "../components/reactbits/Dock";
-import TargetCursor from "../components/reactbits/TargetCursor";
 import { FunLayer } from "../components/FunLayer";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { usePointerFine } from "../hooks/usePointerFine";
+import { AchievementToasts, TrophyButton, unlock } from "./achievements";
+import { Terminal, openTerminal } from "./Terminal";
+import { Cursor } from "./Cursor";
 import { Hero } from "./sections/Hero";
-import { Glance, Marquee } from "./sections/Glance";
+import { Marquee } from "./sections/Glance";
+import { About } from "./sections/About";
 import { Work } from "./sections/Work";
 import { Expertise, Skills, Experience } from "./sections/Depth";
 import { Activity } from "./sections/Activity";
-import { Contact, Footer } from "./sections/Contact";
+import { Playground } from "./sections/Playground";
+import { Contact } from "./sections/Contact";
+import { Footer } from "./sections/Footer";
 import "./site.css";
 
-const SECTIONS = ["top", "about", "work", "expertise", "skills", "experience", "github", "contact"];
+const SECTIONS = ["top", "about", "work", "expertise", "skills", "experience", "github", "games", "contact"];
 
 /** Counts 0 → 100 over a black curtain, then lifts it. Skipped for reduced motion. */
 function Preloader({ onDone }) {
@@ -133,6 +139,18 @@ function applyTheme(theme) {
  */
 function useTheme(reduced) {
   const [theme, setTheme] = useState(initialTheme);
+  const flips = React.useRef(0);
+
+  // Five switches in one visit earns the "Light switch" achievement; the
+  // terminal's theme command arrives as an event.
+  useEffect(() => {
+    if (++flips.current > 5) unlock("theme");
+  }, [theme]);
+  useEffect(() => {
+    const on = (e) => setTheme(e.detail === "light" ? "light" : "dark");
+    window.addEventListener("rm:theme", on);
+    return () => window.removeEventListener("rm:theme", on);
+  }, []);
 
   useEffect(() => {
     applyTheme(theme);
@@ -193,6 +211,57 @@ function ThemeToggle({ theme, onToggle }) {
   );
 }
 
+/**
+ * "Hire me" plays hard to get on a mouse: it hops away twice, then gives in.
+ * Touch and keyboard users get a normal link. Once caught it stays put for the
+ * rest of the visit.
+ */
+const HOPS = [
+  { x: -70, y: 52 },
+  { x: -240, y: 52 },
+];
+function HirePill() {
+  const fine = usePointerFine();
+  const [hops, setHops] = useState(() => {
+    try {
+      return sessionStorage.getItem("rm-hire-caught") ? 99 : 0;
+    } catch {
+      return 99;
+    }
+  });
+  const [label, setLabel] = useState("Hire me");
+  const at = hops > 0 && hops <= HOPS.length ? HOPS[hops - 1] : { x: 0, y: 0 };
+
+  const dodge = () => {
+    if (!fine || hops > HOPS.length) return;
+    const n = hops + 1;
+    setHops(n);
+    if (n <= HOPS.length) {
+      setLabel(n === 1 ? "Nope!" : "Too slow!");
+      return;
+    }
+    setLabel("Okay okay, let's talk");
+    unlock("hire");
+    try {
+      sessionStorage.setItem("rm-hire-caught", "1");
+    } catch {}
+    setTimeout(() => setLabel("Hire me"), 2600);
+  };
+
+  return (
+    <motion.a
+      href="#contact"
+      className="pill hire-pill cursor-target"
+      data-cursor-label="say hi"
+      onPointerEnter={dodge}
+      animate={{ x: at.x, y: at.y }}
+      transition={{ type: "spring", stiffness: 520, damping: 22 }}
+    >
+      {label}
+    </motion.a>
+  );
+}
+
 const go = (id) => () => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
 export default function SiteApp() {
@@ -201,6 +270,24 @@ export default function SiteApp() {
   const active = useScrollSpy(SECTIONS, { offset: 200, syncHash: false });
 
   const [theme, toggleTheme] = useTheme(reduced);
+
+  // "The whole story": reaching the footer.
+  // Only after the preloader, and only from a real scroll (not a restored
+  // position or a layout that's still settling).
+  useEffect(() => {
+    if (loading) return;
+    const el = document.querySelector(".site footer");
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => e.isIntersecting && window.scrollY > window.innerHeight * 3 && unlock("bottom"),
+      { threshold: 0.6 }
+    );
+    const t = setTimeout(() => io.observe(el), 1500);
+    return () => {
+      clearTimeout(t);
+      io.disconnect();
+    };
+  }, [loading]);
 
   // Keep the page from scrolling under the curtain.
   useEffect(() => {
@@ -213,6 +300,7 @@ export default function SiteApp() {
     { icon: <FiCpu size={20} />, label: "Expertise", onClick: go("expertise"), active: active === "expertise" || active === "skills" },
     { icon: <FiBriefcase size={20} />, label: "Experience", onClick: go("experience"), active: active === "experience" },
     { icon: <FiGithub size={20} />, label: "Activity", onClick: go("github"), active: active === "github" },
+    { icon: <FiPlay size={20} />, label: "Games", onClick: go("games"), active: active === "games" },
     { icon: <FiMail size={20} />, label: "Contact", onClick: go("contact"), active: active === "contact" },
     { separator: true },
     { icon: <FiLinkedin size={20} />, label: "LinkedIn", onClick: () => window.open(resumeData.linkedinUrl, "_blank", "noopener") },
@@ -226,29 +314,37 @@ export default function SiteApp() {
         <ScrollProgress />
         <div className="site-grain" aria-hidden="true" />
         {!reduced && <CursorGlow />}
-        {!reduced && <TargetCursor spinDuration={2.4} hideDefaultCursor parallaxOn cursorColor="#ffffff" blendMode="difference" />}
+        <Cursor />
 
         <header className="topbar">
-          <a href="#top" className="logo cursor-target" data-cursor-label="home" aria-label="Back to top"><b>RM</b> Raza Ali Malik</a>
+          <a href="#top" className="logo cursor-target" data-cursor-label="home" aria-label="Back to top"><b>RM</b> <span className="logo-name">Raza Ali Malik</span></a>
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
             <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            <TrophyButton />
+            <button type="button" className="theme-toggle term-btn cursor-target" data-cursor-label="terminal" aria-label="Open terminal" onClick={openTerminal}>
+              <FiTerminal size={15} />
+            </button>
             <span className="pill pill-time"><span className="live-dot" /> UK <UkTime /></span>
-            <a href="#contact" className="pill cursor-target" data-cursor-label="say hi" style={{ color: "var(--ink)", textDecoration: "none" }}>Hire me</a>
+            <HirePill />
           </div>
         </header>
 
         <main>
           <Hero ready={!loading} />
           <Marquee />
-          <Glance />
+          <About />
           <Work />
           <Expertise />
           <Skills />
           <Experience />
           <Activity />
+          <Playground />
           <Contact />
         </main>
         <Footer />
+
+        <Terminal />
+        <AchievementToasts />
 
         <div className="dock-host">
           <Dock items={dockItems} baseItemSize={46} magnification={68} panelHeight={64} theme={theme} accentColor={theme === "dark" ? "#34d399" : "#059669"} />

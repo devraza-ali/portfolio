@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { FiCommand } from "react-icons/fi";
 import ClickSpark from "./reactbits/ClickSpark";
 import { useThemeMode } from "../hooks/useThemeMode";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { unlock } from "../site/achievements";
 
 // Sparks are drawn on a canvas, so they need real colours rather than the
 // var(--accent) tokens. These track the accent ramp in index.css per theme.
@@ -29,7 +31,7 @@ export function FunLayer({ children }) {
     if (window.__rmGreeted) return;
     window.__rmGreeted = true;
     console.log(
-      "%c👋 Hey, fellow dev!%c\nPoking around the source? Try the Konami code on the page: ↑ ↑ ↓ ↓ ← → ← → B A",
+      "%cHey, fellow dev!%c\nPoking around the source? Press ` on the page for a terminal, or try the Konami code: ↑ ↑ ↓ ↓ ← → ← → B A",
       "font: 700 14px 'Space Grotesk', sans-serif; color: #34D399",
       "font: 12px 'JetBrains Mono', monospace; color: inherit"
     );
@@ -53,6 +55,7 @@ export function FunLayer({ children }) {
   }, [reducedMotion]);
 
   function celebrate() {
+    unlock("konami");
     setToast(true);
     window.clearTimeout(celebrate.t);
     celebrate.t = window.setTimeout(() => setToast(false), 4200);
@@ -90,7 +93,7 @@ export function FunLayer({ children }) {
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="fun-toast"
           >
-            <span style={{ fontSize: 18 }}>🎮</span>
+            <FiCommand size={18} style={{ color: "var(--accent-text)", flexShrink: 0 }} />
             <div>
               <div style={{ fontWeight: 700, fontFamily: "'Space Grotesk',sans-serif" }}>Achievement unlocked</div>
               <div style={{ fontSize: 12, opacity: 0.8 }}>

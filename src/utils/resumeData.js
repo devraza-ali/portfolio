@@ -91,7 +91,7 @@ const resumeData = {
   experience: [
     {
       company: "Blackstack Software Solutions",
-      companyUrl: "https://blackstacksolutions.com/",
+      companyUrl: "https://bkstack.com/",
       location: "Lahore, Pakistan",
       roles: [
         { title: "Software Engineer II (Team Lead)", duration: "Jan 2025 — Present" },
