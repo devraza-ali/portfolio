@@ -9,7 +9,7 @@ const GITHUB_USERNAME = "devraza-ali";
 
 // Oldest year worth offering — GitHub's own profile sidebar stops here, because
 // there is no contribution data before the account existed.
-const GITHUB_JOINED_YEAR = 2023;
+const GITHUB_JOINED_YEAR = 2026;
 
 // Authentic GitHub palettes — the real ones GitHub itself ships for each theme.
 // Kept as hex literals (not CSS vars) because the cells derive borders and glows
@@ -169,7 +169,7 @@ function makeHeightScale(contributions, minZ, maxZ) {
   };
 }
 
-function ContributionHeatmap({ contributions, totalThisYear, year }) {
+export function ContributionHeatmap({ contributions, totalThisYear, year }) {
   const reducedMotion = usePrefersReducedMotion();
   const boardRef = useRef(null);
   const wrapRef = useRef(null);

@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Rebuild every 6 hours so the GitHub contribution graph (snapshotted at
+  # build time by scripts/fetch-contributions.mjs) stays current between pushes.
+  schedule:
+    - cron: "17 */6 * * *"
 
 permissions:
   contents: write

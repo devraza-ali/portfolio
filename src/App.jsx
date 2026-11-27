@@ -4,6 +4,7 @@ import { GemStatsProvider } from "./context/GemStatsContext";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { Preloader } from "./components/Preloader";
+import { FunLayer } from "./components/FunLayer";
 import {
   HeroSection,
   MetricsSection,
@@ -46,6 +47,7 @@ export default function App() {
           the splash so the reveal shows a settled layout rather than one still
           assembling itself. */}
       {booting && <Preloader onDone={finishBoot} />}
+      <FunLayer>
       <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--primary)", fontFamily: "'Inter',sans-serif" }}>
         <Nav theme={theme} toggleTheme={() => setTheme((t) => (t === "dark" ? "light" : "dark"))} />
         <main>
@@ -64,6 +66,7 @@ export default function App() {
         </main>
         <Footer />
       </div>
+      </FunLayer>
     </GemStatsProvider>
   );
 }

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useTilt3D } from "../hooks/useTilt3D";
 import C, { alpha } from "../theme";
 import IconForTech from "./Icons";
+import BlurText from "./reactbits/BlurText";
 
 export function FadeUp({ children, delay = 0, className = "" }) {
   return (
@@ -219,20 +220,19 @@ export function Section({ id, label, title, subtitle, children, tinted = false, 
             </p>
           </FadeUp>
         )}
-        <FadeUp delay={40}>
-          <h2
-            style={{
-              fontFamily: "'Space Grotesk',sans-serif",
-              fontSize: "clamp(28px,4vw,38px)",
-              fontWeight: 700,
-              color: C.primary,
-              marginBottom: 12,
-              lineHeight: 1.15,
-            }}
-          >
-            {title}
-          </h2>
-        </FadeUp>
+        {/* Titles blur in word by word as the section scrolls into view. Non-string
+            titles (if one is ever passed JSX) fall back to the plain fade. */}
+        {typeof title === "string" ? (
+          <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "clamp(28px,4vw,38px)", fontWeight: 700, color: C.primary, marginBottom: 12, lineHeight: 1.15 }}>
+            <BlurText as="h2" text={title} delay={90} direction="bottom" blur={12} distance={24} threshold={0.3} className="section-title" />
+          </div>
+        ) : (
+          <FadeUp delay={40}>
+            <h2 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "clamp(28px,4vw,38px)", fontWeight: 700, color: C.primary, marginBottom: 12, lineHeight: 1.15 }}>
+              {title}
+            </h2>
+          </FadeUp>
+        )}
         {subtitle && (
           <FadeUp delay={80}>
             <p style={{ color: C.secondary, fontSize: 17, maxWidth: 640, marginBottom: 56, lineHeight: 1.7 }}>

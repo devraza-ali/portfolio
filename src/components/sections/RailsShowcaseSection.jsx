@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import resumeData from "../../utils/resumeData";
 import C, { alpha } from "../../theme";
-import { FadeUp, Card, Section } from "../UI";
+import { FadeUp, Section } from "../UI";
+import SpotlightCard from "../reactbits/SpotlightCard";
+import { useThemeMode } from "../../hooks/useThemeMode";
 import { DetailModal } from "../DetailModal";
 import { IconForTech, getTechColor } from "../Icons";
 
 export function RailsShowcaseSection() {
   const [active, setActive] = useState(null);
+  const mode = useThemeMode();
 
   return (
     <Section id="rails-showcase" label="Technical Depth" title="Rails Proficiency" subtitle="Not a skills checklist — concrete proof of depth across architecture, data, payments, and security. Click a card for the details." tinted watermark="RAILS">
@@ -15,10 +18,30 @@ export function RailsShowcaseSection() {
           const accentColor = getTechColor(pillar.icon);
           return (
             <FadeUp key={i} delay={i * 80}>
-              <Card
-                hover
+              <SpotlightCard
+                theme={mode}
+                spotlightColor={mode === "dark" ? "#93B4D6" : "#3E6690"}
+                intensity={mode === "dark" ? 0.22 : 0.5}
+                spotlightSize={260}
+                className="rails-spot"
+                role="button"
+                tabIndex={0}
                 onClick={() => setActive(pillar)}
-                style={{ padding: 28, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", justifyContent: "center", cursor: "pointer" }}
+                onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setActive(pillar))}
+                style={{
+                  "--spotlight-card-surface": "var(--surface)",
+                  "--spotlight-card-border": "var(--border-c)",
+                  "--spotlight-card-shadow": "0 4px 16px var(--shadow-base), var(--shadow-inset)",
+                  borderRadius: C.radius,
+                  padding: 28,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
               >
                 <div
                   style={{
@@ -38,7 +61,7 @@ export function RailsShowcaseSection() {
                 </div>
                 <h3 style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, color: C.primary, fontSize: 17, margin: 0 }}>{pillar.title}</h3>
                 <p style={{ fontSize: 11, color: C.accentText, marginTop: 14, fontFamily: "'JetBrains Mono',monospace" }}>Click for details →</p>
-              </Card>
+              </SpotlightCard>
             </FadeUp>
           );
         })}

@@ -21,7 +21,7 @@ const resumeData = {
   portfolioUrl: "https://razaali.is-a.dev",
   linkedinUrl: "https://www.linkedin.com/in/raza-malik-81109a268",
   githubUrl: "https://github.com/devraza-ali",
-  photo: "/raza-ali-no-bg.png",
+  photo: "/raza-ali-portrait.jpg",
 
   availability: {
     status: "Available immediately",

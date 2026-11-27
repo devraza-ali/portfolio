@@ -9,6 +9,16 @@ import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { useScrollParallax } from "../../hooks/useScrollParallax";
 import { useTilt3D } from "../../hooks/useTilt3D";
 import { useInView } from "../../hooks/useInView";
+import { useThemeMode } from "../../hooks/useThemeMode";
+import ShinyText from "../reactbits/ShinyText";
+import Magnet from "../reactbits/Magnet";
+
+// ShinyText paints through a canvas colour parser, so it needs real colours rather
+// than the var(--accent-text) tokens — these mirror index.css for each theme.
+const SHINE = {
+  dark: { color: "#6E97C2", shine: "#D6E6F7" },
+  light: { color: "#2C4A67", shine: "#8FB8E3" },
+};
 
 function TiltPortrait() {
   const { ref, onPointerMove, onPointerLeave, tilt, enabled } = useTilt3D({ max: 8 });
@@ -142,6 +152,7 @@ function ContactWidget() {
 }
 
 export function HeroSection() {
+  const shine = SHINE[useThemeMode()];
   const { ref: parallaxRef, y: parallaxY } = useScrollParallax(140, ["start start", "end start"]);
 
   return (
@@ -228,7 +239,9 @@ export function HeroSection() {
                 marginBottom: 18,
               }}
             >
-              I help SaaS founders ship <span style={{ color: C.accentText }}>production-ready</span> React & Rails features.
+              I help SaaS founders ship{" "}
+              <ShinyText text="production-ready" color={shine.color} shineColor={shine.shine} speed={2.6} delay={1.2} />{" "}
+              React & Rails features.
             </h1>
           </FadeUp>
 
@@ -250,6 +263,7 @@ export function HeroSection() {
 
           <FadeUp delay={120}>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 36 }}>
+              <Magnet padding={60} magnetStrength={3} maxOffset={14}>
               <a
                 id="hero-contact"
                 href="#contact"
@@ -270,6 +284,7 @@ export function HeroSection() {
               >
                 Get in Touch <IconArrow />
               </a>
+              </Magnet>
               <a
                 id="hero-view-work"
                 href="#case-studies"
