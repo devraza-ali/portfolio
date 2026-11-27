@@ -6,6 +6,7 @@ import { getScreenshotUrl } from "../../utils/screenshot";
 import { AutoProjectImage } from "../../components/AutoProjectImage";
 import { SectionHead } from "../parts";
 import { usePointerFine } from "../../hooks/usePointerFine";
+import { unlock } from "../achievements";
 
 const projects = resumeData.experience[0].projects;
 const EASE = [0.22, 1, 0.36, 1];
@@ -61,6 +62,9 @@ function FloatingPreview({ project }) {
   );
 }
 
+// Project rows opened this visit, for the "Curious mind" achievement.
+const opened = new Set();
+
 export function Work() {
   const fine = usePointerFine();
   const [hovered, setHovered] = useState(null);
@@ -88,6 +92,10 @@ export function Work() {
                   onPointerEnter={() => fine && !isOpen && setHovered(p)}
                   onPointerLeave={() => setHovered(null)}
                   onClick={() => {
+                    if (!isOpen) {
+                      opened.add(i);
+                      if (opened.size >= 3) unlock("curious");
+                    }
                     setOpen(isOpen ? -1 : i);
                     setHovered(null);
                   }}

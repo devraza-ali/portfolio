@@ -164,7 +164,10 @@ export function Footer() {
     <footer style={{ position: "relative", padding: "40px 0 150px", borderTop: "1px solid var(--line)", overflow: "hidden" }}>
       <div className="wrap" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16, marginBottom: 40 }}>
         <span className="mono" style={{ color: "var(--dim)", fontSize: 12 }}>
-          © {new Date().getFullYear()} {resumeData.name} · built with React, Framer Motion & React Bits
+          © {new Date().getFullYear()} {resumeData.name} · built with React, Framer Motion & React Bits ·{" "}
+          <button type="button" className="footer-secret cursor-target" data-cursor-label="psst" onClick={() => window.dispatchEvent(new Event("rm:terminal"))}>
+            psst, press <kbd>`</kbd>
+          </button>
         </span>
         <a href="#top" className="btn btn-ghost cursor-target" data-cursor-label="up!" style={{ height: 42, fontSize: 13 }}>
           Back to top <FiArrowUp />
