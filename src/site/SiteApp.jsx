@@ -12,7 +12,8 @@ import { usePointerFine } from "../hooks/usePointerFine";
 import { AchievementToasts, TrophyButton, unlock } from "./achievements";
 import { Terminal, openTerminal } from "./Terminal";
 import { Hero } from "./sections/Hero";
-import { Glance, Marquee } from "./sections/Glance";
+import { Marquee } from "./sections/Glance";
+import { About } from "./sections/About";
 import { Work } from "./sections/Work";
 import { Expertise, Skills, Experience } from "./sections/Depth";
 import { Activity } from "./sections/Activity";
@@ -330,7 +331,7 @@ export default function SiteApp() {
         <main>
           <Hero ready={!loading} />
           <Marquee />
-          <Glance />
+          <About />
           <Work />
           <Expertise />
           <Skills />

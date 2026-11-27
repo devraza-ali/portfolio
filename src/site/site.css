@@ -566,6 +566,17 @@ html.light body {
   padding: 22px 0;
   border-block: 1px solid var(--line);
 }
+.site .logo-rails {
+  display: grid;
+  gap: 22px;
+  padding: 30px 0;
+}
+.site .logo-rail {
+  font-family: var(--display);
+  letter-spacing: -0.01em;
+}
+.site .logo-rail-core { color: var(--soft); font-size: 17px; }
+.site .logo-rail-tools { color: var(--dim); font-size: 14.5px; }
 .site .marquee-text {
   font-family: var(--display);
   font-weight: 400;
@@ -1330,6 +1341,153 @@ html.light body {
   .site .topbar > div { gap: 8px !important; }
   .site .term { height: min(520px, calc(100vh - 120px)); }
   .site .term-body { font-size: 12px; }
+}
+
+/* ── About ────────────────────────────────────────────────────────────── */
+.site .about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: start;
+}
+.site .about-story { position: sticky; top: 110px; }
+.site .about-bio {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(22px, 2.2vw, 29px);
+  line-height: 1.38;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.site .about-bio .hl { color: var(--accent-text); }
+.site .about-sub { margin: 26px 0 0; color: var(--muted); font-size: 15.5px; line-height: 1.7; }
+.site .about-facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.site .about-facts .chip { cursor: default; }
+.site .about-status { color: var(--accent-text); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.site .about-quote {
+  margin: 34px 0 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+  font-size: 23px;
+  line-height: 1.3;
+  color: var(--soft);
+}
+.site .about-bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(180px, auto);
+  gap: 14px;
+}
+.site .about-bento .span-2 { grid-column: span 2; }
+.site .stat-card { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 28px; }
+.site .stat-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.site .now-live { display: inline-flex; align-items: center; gap: 7px; font: 500 11px/1 "JetBrains Mono", monospace; color: var(--accent-text); letter-spacing: 0.08em; text-transform: uppercase; }
+.site .now-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+.site .now-arrow { color: var(--dim); flex-shrink: 0; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s; }
+.site .now-row:hover .now-arrow { color: var(--accent-text); transform: translate(3px, -3px); }
+.site .now-learning { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 16px; }
+.site .now-learning .mono { font-size: 12px; color: var(--dim); }
+
+/* Sky clock */
+.site .sky-card {
+  position: relative;
+  height: 100%;
+  min-height: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  color: #fff;
+  isolation: isolate;
+  transition: background 1.2s ease;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.site .sky-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.8;
+  animation: sky-twinkle 2.6s ease-in-out infinite;
+}
+@keyframes sky-twinkle { 50% { opacity: 0.15; } }
+.site .sky-orb {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  z-index: 0;
+}
+.site .sky-orb.is-sun { background: radial-gradient(circle, #fff7d1 0%, #ffd45c 55%, #ffb648 100%); box-shadow: 0 0 40px 12px rgba(255, 210, 90, 0.55); }
+.site .sky-orb.is-moon { background: radial-gradient(circle at 35% 35%, #ffffff, #d6dbef 70%); box-shadow: 0 0 30px 6px rgba(200, 210, 255, 0.35), inset -6px -4px 0 rgba(120, 130, 170, 0.35); }
+.site .sky-hills {
+  position: absolute;
+  inset: auto -10% -30% -10%;
+  height: 55%;
+  border-radius: 50% 50% 0 0;
+  background: rgba(0, 0, 0, 0.28);
+  z-index: 0;
+}
+.site .sky-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+}
+.site .sky-k { font: 500 11px/1 "JetBrains Mono", monospace; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85; }
+.site .sky-time { font-size: 34px; letter-spacing: -0.03em; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3); }
+.site .sky-time span { opacity: 0.55; font-size: 22px; }
+.site .sky-mood { font-size: 13.5px; margin-top: 6px; opacity: 0.92; }
+
+/* Fact roulette */
+.site .fact-text { margin: 0; font-family: var(--display); font-size: 18px; line-height: 1.4; letter-spacing: -0.01em; color: var(--ink); min-height: 4.2em; }
+.site .fact-enc { color: var(--accent-text); opacity: 0.7; }
+.site .fact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line2);
+  background: transparent;
+  color: var(--soft);
+  font: 500 13px/1 "Inter", system-ui, sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.site .fact-btn:hover { border-color: var(--accent); color: var(--accent-text); background: var(--accent-soft); }
+@media (max-width: 1024px) {
+  .site .about-grid { grid-template-columns: 1fr; }
+  .site .about-story { position: static; max-width: 720px; }
+}
+@media (max-width: 640px) {
+  .site .about-bento { grid-auto-rows: auto; gap: 10px; }
+  .site .about-bento .stat-num { font-size: 30px; }
+  .site .about-bento > :nth-child(n + 5) { grid-column: span 2; }
 }
 
 /* ── Responsive ───────────────────────────────────────────────────────── */
